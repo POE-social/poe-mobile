@@ -10,7 +10,6 @@ import Profile from './screens/Profile';
 import Notifications from './screens/Notifications';
 import Followers from './screens/Followers';
 import Following from './screens/Following';
-import {useAuthStore} from './utils/authentication';
 import FollowRequests from './screens/FollowRequests';
 import React from 'react';
 import useAuthorization from './utils/useAuthorization';
@@ -65,7 +64,6 @@ const NotificationsNavigator = () => (
 
 export default function Navigation() {
   // Authentication state for conditional rendering later on
-  const loggedIn = useAuthStore(state => state.loggedIn);
   const {selectedAccount} = useAuthorization();
 
   // Create the main navigation component

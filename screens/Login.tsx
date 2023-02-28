@@ -1,12 +1,10 @@
 import React from 'react';
 import {useNavigation, ParamListBase} from '@react-navigation/native';
 import {Button, StyleSheet, Text, View} from 'react-native';
-import {useAuthStore} from '../utils/authentication';
 import type {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import ConnectButton from '../components/buttons/ConnectButton';
 
 export default function Login() {
-  const toggleLogin = useAuthStore(state => state.toggle);
   const nav = useNavigation<BottomTabNavigationProp<ParamListBase, 'Login'>>();
 
   return (
