@@ -1,17 +1,9 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  Image,
-  FlatList,
-  Pressable,
-} from "react-native";
-import { useAuthStore } from "../utils/authentication";
-import { useNavigation } from "@react-navigation/native";
+import React from 'react';
+import {StyleSheet, Text, View, Image, FlatList, Pressable} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import DisconnectButton from '../components/buttons/DisconnectButton';
 
 export default function Profile() {
-  const toggleLogin = useAuthStore((state) => state.toggle);
   const nav = useNavigation();
   return (
     <FlatList
@@ -20,7 +12,7 @@ export default function Profile() {
           <View style={styles.profileHeader}>
             <Image
               style={styles.profilePicture}
-              source={require("../assets/icon.png")}
+              source={require('../assets/icon.png')}
             />
             <View style={styles.userInfo}>
               <Text style={styles.username}>Username</Text>
@@ -32,9 +24,8 @@ export default function Profile() {
           <View style={styles.followPanel}>
             <Pressable
               onPress={() => {
-                nav.navigate("Follow", { screen: "Following" });
-              }}
-            >
+                nav.navigate('Follow', {screen: 'Following'});
+              }}>
               <View style={styles.followInfo}>
                 <Text style={styles.followNum}>42</Text>
                 <Text>Following</Text>
@@ -42,9 +33,8 @@ export default function Profile() {
             </Pressable>
             <Pressable
               onPress={() => {
-                nav.navigate("Follow", { screen: "Followers" });
-              }}
-            >
+                nav.navigate('Follow', {screen: 'Followers'});
+              }}>
               <View style={styles.followInfo}>
                 <Text style={styles.followNum}>22</Text>
                 <Text>Followers</Text>
@@ -56,27 +46,24 @@ export default function Profile() {
       }
       style={styles.postGrid}
       data={[...Array(13).keys()]}
-      renderItem={({ item }) => (
+      renderItem={({item}) => (
         <View
           style={{
             flex: 1,
-            flexDirection: "column",
+            flexDirection: 'column',
             padding: 8,
-          }}
-        >
+          }}>
           <Image
             style={styles.imageThumbnail}
-            source={require("../assets/icon.png")}
+            source={require('../assets/icon.png')}
           />
         </View>
       )}
       //Setting the number of column
       numColumns={3}
       keyExtractor={(item, index) => index.toString()}
-      ListFooterComponent={
-        <Button title="Logout" onPress={() => toggleLogin()} />
-      }
-      ListFooterComponentStyle={{ marginBottom: 16, alignItems: "center" }}
+      ListFooterComponent={<DisconnectButton />}
+      ListFooterComponentStyle={{marginBottom: 16, alignItems: 'center'}}
     />
   );
 }
@@ -84,13 +71,13 @@ export default function Profile() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "stretch",
-    justifyContent: "flex-start",
+    backgroundColor: '#fff',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start',
     padding: 8,
   },
   profileHeader: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginBottom: 16,
   },
   profilePicture: {
@@ -103,33 +90,33 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   username: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   userDescription: {
     fontSize: 12,
     opacity: 0.5,
   },
   followPanel: {
-    width: "auto",
-    flexDirection: "row",
+    width: 'auto',
+    flexDirection: 'row',
   },
   followInfo: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginRight: 32,
   },
   followNum: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginRight: 4,
   },
   postTitle: {
     fontSize: 22,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginTop: 32,
   },
-  postGrid: { backgroundColor: "white", padding: 8 },
+  postGrid: {backgroundColor: 'white', padding: 8},
   imageThumbnail: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     height: 100,
     width: 100,
   },
