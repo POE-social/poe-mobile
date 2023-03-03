@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View, Button } from "react-native";
-import { useAuthStore } from "../utils/authentication";
+import React from 'react';
+import {StyleSheet, Text, View, Button} from 'react-native';
+import {useAuthStore} from '../utils/authentication';
 
 export default function NewPost() {
-  const toggleLogin = useAuthStore((state) => state.toggle);
+  const toggleLogin = useAuthStore(state => state.toggle);
   return (
     <View style={styles.container}>
       <Text>New post page</Text>
@@ -14,8 +15,8 @@ export default function NewPost() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

@@ -1,8 +1,9 @@
-import { Button, StyleSheet, Text, View } from "react-native";
-import { useAuthStore } from "../utils/authentication";
+import React from 'react';
+import {Button, StyleSheet, Text, View} from 'react-native';
+import {useAuthStore} from '../utils/authentication';
 
 export default function Feed() {
-  const toggleLogin = useAuthStore((state) => state.toggle);
+  const toggleLogin = useAuthStore(state => state.toggle);
 
   return (
     <View style={styles.container}>
@@ -15,8 +16,8 @@ export default function Feed() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

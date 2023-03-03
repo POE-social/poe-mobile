@@ -1,19 +1,20 @@
-import { StyleSheet, Text, View, Button, FlatList, Image } from "react-native";
-import UnfollowButton from "../components/buttons/UnfollowButton";
-import { useAuthStore } from "../utils/authentication";
+import {StyleSheet, Text, View, Button, FlatList, Image} from 'react-native';
+import React from 'react';
+import UnfollowButton from '../components/buttons/UnfollowButton';
+import {useAuthStore} from '../utils/authentication';
 
 export default function Following() {
-  const toggleLogin = useAuthStore((state) => state.toggle);
+  const toggleLogin = useAuthStore(state => state.toggle);
   return (
     <View style={styles.container}>
       <FlatList
         style={styles.list}
         data={[...Array(13).keys()]}
-        renderItem={({ item }) => (
+        renderItem={({item}) => (
           <View style={styles.follower}>
             <Image
               style={styles.profilePicture}
-              source={require("../assets/icon.png")}
+              source={require('../assets/icon.png')}
             />
             <View style={styles.userInfo}>
               <Text style={styles.username}>Username</Text>
@@ -29,7 +30,7 @@ export default function Following() {
         }
         ListFooterComponentStyle={{
           marginBottom: 16,
-          alignItems: "center",
+          alignItems: 'center',
         }}
       />
     </View>
@@ -39,14 +40,14 @@ export default function Following() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "stretch",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'stretch',
+    justifyContent: 'center',
   },
   list: {},
   follower: {
-    flexDirection: "row",
-    alignItems: "flex-start",
+    flexDirection: 'row',
+    alignItems: 'flex-start',
     flex: 1,
     marginVertical: 8,
     marginHorizontal: 12,
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
   username: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   userDescription: {
     fontSize: 12,

@@ -1,21 +1,22 @@
-import { StyleSheet, Text, View, Button, FlatList, Image } from "react-native";
-import DeclineButton from "../components/buttons/DeclineButton";
-import PositiveButton from "../components/buttons/PositiveButton";
-import { useAuthStore } from "../utils/authentication";
+import React from 'react';
+import {StyleSheet, Text, View, Button, FlatList, Image} from 'react-native';
+import DeclineButton from '../components/buttons/DeclineButton';
+import PositiveButton from '../components/buttons/PositiveButton';
+import {useAuthStore} from '../utils/authentication';
 
 export default function FollowRequest() {
-  const toggleLogin = useAuthStore((state) => state.toggle);
+  const toggleLogin = useAuthStore(state => state.toggle);
   return (
     <View style={styles.container}>
       <FlatList
         ListHeaderComponent={<Text style={styles.title}>Follow Request</Text>}
         style={styles.list}
         data={[...Array(13).keys()]}
-        renderItem={({ item }) => (
+        renderItem={({item}) => (
           <View style={styles.followRequest}>
             <Image
               style={styles.profilePicture}
-              source={require("../assets/icon.png")}
+              source={require('../assets/icon.png')}
             />
             <Text style={styles.username}>Username</Text>
 
@@ -28,7 +29,7 @@ export default function FollowRequest() {
         }
         ListFooterComponentStyle={{
           marginBottom: 16,
-          alignItems: "center",
+          alignItems: 'center',
         }}
       />
     </View>
@@ -38,21 +39,21 @@ export default function FollowRequest() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "stretch",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'stretch',
+    justifyContent: 'center',
   },
   title: {
     fontSize: 22,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginLeft: 16,
     marginBottom: 16,
   },
   list: {},
   followRequest: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     flex: 1,
     marginVertical: 8,
     marginHorizontal: 12,
@@ -63,5 +64,5 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginRight: 16,
   },
-  username: { marginRight: 32 },
+  username: {marginRight: 32},
 });
