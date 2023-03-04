@@ -12,7 +12,7 @@ export const createUser = async (
 ) => {
   console.log('Creating new user...');
   transact(async wallet => {
-    wallet.authorize({cluster: 'mainnet-beta', identity: APP_IDENTITY});
+    await wallet.authorize({cluster: 'mainnet-beta', identity: APP_IDENTITY});
     const user: User = await socialProtocol.createUser(
       nickname,
       avatar,
