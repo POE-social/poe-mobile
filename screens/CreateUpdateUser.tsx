@@ -1,5 +1,4 @@
-import {User} from '@spling/social-protocol/dist/types';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   ScrollView,
   View,
@@ -10,28 +9,12 @@ import {
   Button,
 } from 'react-native';
 import useSocialProtocolStore from '../stores/useSocialProtocolStore';
+import useUserStore from '../stores/useUserStore';
 import {updateUser} from '../utils/updateUser';
-import useAuthorization from '../utils/useAuthorization';
 
 const CreateUpdateUser = () => {
   const socialProtocol = useSocialProtocolStore(state => state.socialProtocol);
-  const {selectedAccount} = useAuthorization();
-  const [user, setUser] = useState<User | null>();
-
-  useEffect(() => {
-    const getUser = async () => {
-      if (!selectedAccount) {
-        return;
-      }
-      const u = await socialProtocol?.getUserByPublicKey(
-        selectedAccount.publicKey,
-      );
-      setUser(u);
-      setNickname(u?.nickname ? u.nickname : '');
-      setBio(u?.bio ? u.bio : '');
-    };
-    getUser();
-  }, [selectedAccount, socialProtocol]);
+  const user = useUserStore(state => state.user);
 
   const [nickname, setNickname] = useState(user?.nickname ? user.nickname : '');
   const [bio, setBio] = useState(user?.bio ? user.bio : '');
@@ -63,6 +46,9 @@ const CreateUpdateUser = () => {
           title="Save"
           onPress={() => {
             if (user) {
+              if (!socialProtocol) {
+                return;
+              }
               updateUser(socialProtocol, nickname, null, bio, null);
             }
           }}

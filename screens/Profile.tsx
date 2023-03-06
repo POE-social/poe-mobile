@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,28 +10,11 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import DisconnectButton from '../components/buttons/DisconnectButton';
-import useSocialProtocolStore from '../stores/useSocialProtocolStore';
-import useAuthorization from '../utils/useAuthorization';
-import {User} from '@spling/social-protocol/dist/types';
+import useUserStore from '../stores/useUserStore';
 
 export default function Profile() {
   const nav = useNavigation();
-  const socialProtocol = useSocialProtocolStore(state => state.socialProtocol);
-  const {selectedAccount} = useAuthorization();
-  const [user, setUser] = useState<User | null>();
-
-  useEffect(() => {
-    const getUser = async () => {
-      if (!selectedAccount) {
-        return;
-      }
-      const u = await socialProtocol?.getUserByPublicKey(
-        selectedAccount.publicKey,
-      );
-      setUser(u);
-    };
-    getUser();
-  }, [selectedAccount, socialProtocol]);
+  const user = useUserStore(state => state.user);
 
   return (
     <FlatList
