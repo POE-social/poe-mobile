@@ -12,13 +12,13 @@ export const createPost = async (
   socialProtocol: SocialProtocol,
   title: string | null | undefined,
   text: string | null | undefined,
-  files: FileData[] | FileUriData[] | null | undefined,
+  files: FileData[] | FileUriData[],
   tag: string | null | undefined,
   metadata?: any,
 ) => {
   console.log('Creating new post...');
   transact(async wallet => {
-    wallet.authorize({cluster: 'mainnet-beta', identity: APP_IDENTITY});
+    await wallet.authorize({cluster: 'mainnet-beta', identity: APP_IDENTITY});
     const post: Post = await socialProtocol.createPost(
       1,
       title,
