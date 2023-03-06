@@ -21,7 +21,6 @@ export default function ConnectButton() {
       setAuthorizationInProgress(true);
       await transact(async wallet => {
         const refreshed = await authorizeSession(wallet);
-        console.log('Auth:', refreshed);
         const account = refreshed || selectedAccount;
         const nodeWallet = {
           signTransaction: async (tx: Transaction) => {
@@ -59,7 +58,7 @@ export default function ConnectButton() {
           options,
         ).init();
         setSocialProtocol(socialProtocol);
-        console.log('SocialProtocl:', socialProtocol);
+        console.log('SocialProtocol:', socialProtocol);
       });
     } finally {
       setAuthorizationInProgress(false);
