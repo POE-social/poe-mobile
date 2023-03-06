@@ -13,11 +13,12 @@ import {launchImageLibrary, Asset} from 'react-native-image-picker';
 import useSocialProtocolStore from '../stores/useSocialProtocolStore';
 import {FileUriData} from '@spling/social-protocol';
 import SelectDropdown from 'react-native-select-dropdown';
+import {createPost} from '../utils/createPost';
 
 export default function NewPost() {
   const socialProtocol = useSocialProtocolStore(state => state.socialProtocol);
 
-  const groupNumber = 583646566156683917;
+  // const groupNumber = 583646566156683917;
 
   const [path, setPath] = useState<Path | null>(null);
   const paths: Path[] = ['warrior', 'sage', 'nurturer', 'chef', 'traveler'];
@@ -61,12 +62,23 @@ export default function NewPost() {
     };
 
     try {
-      await socialProtocol?.createPost(
-        groupNumber,
+      // await socialProtocol?.createPost(
+      //   groupNumber,
+      //   null,
+      //   caption,
+      //   [fileDataValue],
+      //   path,
+      // );
+      if (!socialProtocol) {
+        return;
+      }
+      await createPost(
+        socialProtocol,
         null,
         caption,
         [fileDataValue],
         path,
+        null,
       );
     } catch (error) {
       console.log('There was an error creating a post with splinglabs');
