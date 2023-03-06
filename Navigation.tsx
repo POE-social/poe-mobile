@@ -13,6 +13,7 @@ import Following from './screens/Following';
 import FollowRequests from './screens/FollowRequests';
 import React from 'react';
 import useAuthorization from './utils/useAuthorization';
+import CreateUpdateUser from './screens/CreateUpdateUser';
 
 const FollowTab = createMaterialTopTabNavigator();
 const FollowNavigator = () => (
@@ -39,6 +40,7 @@ const ProfileNavigator = () => (
         headerShown: false,
       }}
     />
+    <ProfileStack.Screen name="User" component={CreateUpdateUser} />
   </ProfileStack.Navigator>
 );
 
