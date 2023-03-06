@@ -10,6 +10,7 @@ import {
   Button,
 } from 'react-native';
 import useSocialProtocolStore from '../stores/useSocialProtocolStore';
+import {updateUser} from '../utils/updateUser';
 import useAuthorization from '../utils/useAuthorization';
 
 const CreateUpdateUser = () => {
@@ -26,6 +27,8 @@ const CreateUpdateUser = () => {
         selectedAccount.publicKey,
       );
       setUser(u);
+      setNickname(u?.nickname ? u.nickname : '');
+      setBio(u?.bio ? u.bio : '');
     };
     getUser();
   }, [selectedAccount, socialProtocol]);
@@ -56,7 +59,14 @@ const CreateUpdateUser = () => {
           numberOfLines={5}
           maxLength={220}
         />
-        <Button title="Save" onPress={() => {}} />
+        <Button
+          title="Save"
+          onPress={() => {
+            if (user) {
+              updateUser(socialProtocol, nickname, null, bio, null);
+            }
+          }}
+        />
       </View>
     </ScrollView>
   );

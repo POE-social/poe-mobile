@@ -39,18 +39,23 @@ export default function Profile() {
         <View style={styles.container}>
           {user ? (
             <View>
-              <View style={styles.profileHeader}>
-                <Image
-                  style={styles.profilePicture}
-                  source={require('../assets/icon.png')}
-                />
-                <View style={styles.userInfo}>
-                  <Text style={styles.username}>Username</Text>
-                  <Text style={styles.userDescription}>
-                    More info, like description or leaderboard stats
-                  </Text>
+              <Pressable
+                onPress={() => {
+                  nav.navigate('User', {screen: 'CreateUpdateUser'});
+                }}>
+                <View style={styles.profileHeader}>
+                  <Image
+                    style={styles.profilePicture}
+                    source={require('../assets/icon.png')}
+                  />
+                  <View style={styles.userInfo}>
+                    <Text style={styles.username}>{user.nickname}</Text>
+                    <Text style={styles.userDescription}>
+                      More info, like description or leaderboard stats
+                    </Text>
+                  </View>
                 </View>
-              </View>
+              </Pressable>
 
               <View style={styles.followPanel}>
                 <Pressable
