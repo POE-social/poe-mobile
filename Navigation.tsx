@@ -11,8 +11,11 @@ import Notifications from './screens/Notifications';
 import Followers from './screens/Followers';
 import Following from './screens/Following';
 import FollowRequests from './screens/FollowRequests';
-import React from 'react';
+import React, {useEffect} from 'react';
 import useAuthorization from './utils/useAuthorization';
+import CreateUpdateUser from './screens/CreateUpdateUser';
+import useSocialProtocolStore from './stores/useSocialProtocolStore';
+import useUserStore from './stores/useUserStore';
 
 const FollowTab = createMaterialTopTabNavigator();
 const FollowNavigator = () => (
@@ -39,6 +42,7 @@ const ProfileNavigator = () => (
         headerShown: false,
       }}
     />
+    <ProfileStack.Screen name="User" component={CreateUpdateUser} />
   </ProfileStack.Navigator>
 );
 
@@ -65,6 +69,23 @@ const NotificationsNavigator = () => (
 export default function Navigation() {
   // Authentication state for conditional rendering later on
   const {selectedAccount} = useAuthorization();
+  console.log('Selected account:', selectedAccount);
+
+  const socialProtocol = useSocialProtocolStore(state => state.socialProtocol);
+  const setUser = useUserStore(state => state.setUser);
+
+  useEffect(() => {
+    const getUser = async () => {
+      if (!selectedAccount || !socialProtocol) {
+        return;
+      }
+      const u = await socialProtocol.getUserByPublicKey(
+        selectedAccount.publicKey,
+      );
+      setUser(u);
+    };
+    getUser();
+  }, [selectedAccount, socialProtocol, setUser]);
 
   // Create the main navigation component
   const Tab = createBottomTabNavigator();
