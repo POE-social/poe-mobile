@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -29,7 +29,11 @@ export default function Profile() {
                 <View style={styles.profileHeader}>
                   <Image
                     style={styles.profilePicture}
-                    source={require('../assets/icon.png')}
+                    source={
+                      user.avatar
+                        ? {uri: user.avatar}
+                        : require('../assets/icon.png')
+                    }
                   />
                   <View style={styles.userInfo}>
                     <Text style={styles.username}>{user.nickname}</Text>

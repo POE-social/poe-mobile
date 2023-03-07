@@ -18,6 +18,7 @@ const PostComponent = ({
     hoursElapsed > 24
       ? `${Math.round(hoursElapsed / 24)} days ago`
       : `${Math.round(hoursElapsed)} hours ago`;
+
   return (
     <View style={[styles.post, {height: height}]}>
       {post.media[0]?.type === 'jpeg' && (

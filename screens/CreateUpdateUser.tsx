@@ -7,25 +7,55 @@ import {
   Text,
   Image,
   Button,
+  Pressable,
+  Platform,
 } from 'react-native';
 import useSocialProtocolStore from '../stores/useSocialProtocolStore';
 import useUserStore from '../stores/useUserStore';
 import {updateUser} from '../utils/updateUser';
+import {launchImageLibrary, Asset} from 'react-native-image-picker';
+import {createUser} from '../utils/createUser';
+import {FileUriData} from '@spling/social-protocol';
 
 const CreateUpdateUser = () => {
   const socialProtocol = useSocialProtocolStore(state => state.socialProtocol);
   const user = useUserStore(state => state.user);
+  const setUser = useUserStore(state => state.setUser);
 
   const [nickname, setNickname] = useState(user?.nickname ? user.nickname : '');
   const [bio, setBio] = useState(user?.bio ? user.bio : '');
 
+  const [avatar, setAvatar] = useState<Asset | null>(null);
+
+  const handleChoosePhoto = () => {
+    launchImageLibrary({mediaType: 'photo', selectionLimit: 1}, response => {
+      console.log('Image Picker Response: ', response);
+      if (response.assets && response.assets.length > 0) {
+        setAvatar(response.assets[0]);
+      }
+    });
+  };
+
+  console.log('created user:', user);
+
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Image
-          style={styles.profilePicture}
-          source={require('../assets/icon.png')}
-        />
+        <Pressable
+          onPress={() => {
+            handleChoosePhoto();
+          }}>
+          <Image
+            style={styles.profilePicture}
+            source={
+              avatar
+                ? avatar
+                : user?.avatar
+                ? {uri: user.avatar}
+                : require('../assets/icon.png')
+            }
+          />
+        </Pressable>
         <Text style={styles.label}>Nickname</Text>
         <TextInput
           style={styles.input}
@@ -44,12 +74,47 @@ const CreateUpdateUser = () => {
         />
         <Button
           title="Save"
-          onPress={() => {
+          onPress={async () => {
+            if (!socialProtocol) {
+              return;
+            }
+            console.log('Avatar:', avatar);
+            let fileDataValue: FileUriData | null;
+            if (!avatar?.uri || !avatar?.type || !avatar?.fileSize) {
+              fileDataValue = null;
+            } else {
+              const uri = avatar.uri;
+
+              const formattedUri =
+                Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+
+              fileDataValue = {
+                uri: formattedUri,
+                type: avatar.type,
+                size: avatar.fileSize,
+              };
+            }
+
+            console.log('FileDataUri:', fileDataValue);
+
             if (user) {
-              if (!socialProtocol) {
-                return;
-              }
-              updateUser(socialProtocol, nickname, null, bio, null);
+              const updatedUser = await updateUser(
+                socialProtocol,
+                nickname,
+                fileDataValue,
+                bio,
+                null,
+              );
+              setUser(updatedUser);
+            } else {
+              const newUser = await createUser(
+                socialProtocol,
+                nickname,
+                fileDataValue,
+                bio,
+                null,
+              );
+              setUser(newUser);
             }
           }}
         />

@@ -11,7 +11,7 @@ export const updateUser = async (
   metadata?: any,
 ) => {
   console.log('Updating new user...');
-  transact(async wallet => {
+  return transact(async wallet => {
     await wallet.authorize({cluster: 'mainnet-beta', identity: APP_IDENTITY});
     const user: User = await socialProtocol.updateUser(
       nickname,
