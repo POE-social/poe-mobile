@@ -47,7 +47,8 @@ export default function ConnectButton() {
           payer: undefined as any,
         };
         const options = {
-          rpcUrl: 'https://api.mainnet-beta.solana.com/',
+          // rpcUrl: 'https://api.mainnet-beta.solana.com/',
+          rpcUrl: process.env['API_KEY'],
           useIndexer: true,
         } as ProtocolOptions;
 
