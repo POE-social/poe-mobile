@@ -16,6 +16,7 @@ import useAuthorization from './utils/useAuthorization';
 import CreateUpdateUser from './screens/CreateUpdateUser';
 import useSocialProtocolStore from './stores/useSocialProtocolStore';
 import useUserStore from './stores/useUserStore';
+import Settings from './screens/Settings';
 
 const FollowTab = createMaterialTopTabNavigator();
 const FollowNavigator = () => (
@@ -43,6 +44,7 @@ const ProfileNavigator = () => (
       }}
     />
     <ProfileStack.Screen name="User" component={CreateUpdateUser} />
+    <ProfileStack.Screen name="Settings" component={Settings} />
   </ProfileStack.Navigator>
 );
 

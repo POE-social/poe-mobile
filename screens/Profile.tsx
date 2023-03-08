@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,12 +8,14 @@ import {
   Pressable,
   Button,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
 import DisconnectButton from '../components/buttons/DisconnectButton';
 import useUserStore from '../stores/useUserStore';
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 
 export default function Profile() {
-  const nav = useNavigation();
+  const nav =
+    useNavigation<BottomTabNavigationProp<ParamListBase, 'Profile'>>();
   const user = useUserStore(state => state.user);
 
   return (
@@ -22,27 +24,35 @@ export default function Profile() {
         <View style={styles.container}>
           {user ? (
             <View>
-              <Pressable
-                onPress={() => {
-                  nav.navigate('User', {screen: 'CreateUpdateUser'});
-                }}>
-                <View style={styles.profileHeader}>
-                  <Image
-                    style={styles.profilePicture}
-                    source={
-                      user.avatar
-                        ? {uri: user.avatar}
-                        : require('../assets/icon.png')
-                    }
-                  />
-                  <View style={styles.userInfo}>
-                    <Text style={styles.username}>{user.nickname}</Text>
-                    <Text style={styles.userDescription}>
-                      More info, like description or leaderboard stats
-                    </Text>
+              <View style={styles.profileHeader}>
+                <Pressable
+                  onPress={() => {
+                    nav.navigate('User', {screen: 'CreateUpdateUser'});
+                  }}>
+                  <View style={styles.profile}>
+                    <Image
+                      style={styles.profilePicture}
+                      source={
+                        user.avatar
+                          ? {uri: user.avatar}
+                          : require('../assets/icon.png')
+                      }
+                    />
+                    <View style={styles.userInfo}>
+                      <Text style={styles.username}>{user.nickname}</Text>
+                      <Text style={styles.userDescription}>
+                        Level 2 Warrior
+                      </Text>
+                    </View>
                   </View>
-                </View>
-              </Pressable>
+                </Pressable>
+                <Pressable
+                  onPress={() => {
+                    nav.navigate('Settings', {screen: 'Settings'});
+                  }}>
+                  <Text style={styles.settings}>Settings</Text>
+                </Pressable>
+              </View>
 
               <View style={styles.followPanel}>
                 <Pressable
@@ -64,6 +74,11 @@ export default function Profile() {
                   </View>
                 </Pressable>
               </View>
+              <View style={styles.avatarWrapper}>
+                <View style={styles.avatar}>
+                  <Text>Avatar</Text>
+                </View>
+              </View>
               <Text style={styles.postTitle}>Posts</Text>
             </View>
           ) : (
@@ -80,6 +95,7 @@ export default function Profile() {
       data={user ? [...Array(13).keys()] : null}
       renderItem={({item}) => (
         <View
+          key={item}
           style={{
             flex: 1,
             flexDirection: 'column',
@@ -110,7 +126,11 @@ const styles = StyleSheet.create({
   },
   profileHeader: {
     flexDirection: 'row',
-    marginBottom: 16,
+    marginBottom: 8,
+    justifyContent: 'space-between',
+  },
+  profile: {
+    flexDirection: 'row',
   },
   profilePicture: {
     height: 60,
@@ -128,6 +148,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     opacity: 0.5,
   },
+  settings: {marginRight: 16},
   followPanel: {
     width: 'auto',
     flexDirection: 'row',
@@ -139,6 +160,17 @@ const styles = StyleSheet.create({
   followNum: {
     fontWeight: 'bold',
     marginRight: 4,
+  },
+  avatarWrapper: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  avatar: {
+    marginTop: 16,
+    height: 160,
+    width: 140,
+    alignItems: 'center',
+    backgroundColor: 'green',
   },
   postTitle: {
     fontSize: 22,
