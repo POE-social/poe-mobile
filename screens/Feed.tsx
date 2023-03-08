@@ -30,7 +30,7 @@ export default function Feed() {
           if (newPosts.length === 0) {
             setEndOfList(true);
           }
-          setPosts(prevPosts => [...prevPosts, ...newPosts]);
+          setPosts([...posts, ...newPosts]);
         } catch (error) {
           console.log(error);
         } finally {
@@ -72,7 +72,7 @@ export default function Feed() {
       <FlatList
         data={posts}
         renderItem={renderItem}
-        keyExtractor={item => item.publicKey.toBase58()}
+        keyExtractor={item => item.postId.toString()}
         onEndReached={handleLoadMorePosts}
         onEndReachedThreshold={0.5}
         refreshControl={

@@ -34,7 +34,7 @@ export default function NewPost() {
   // Select the photo
   const handleChoosePhoto = () => {
     launchImageLibrary({mediaType: 'photo', selectionLimit: 1}, response => {
-      // console.log(response);
+      console.log('Image Picker Response: ', response);
       if (response.assets && response.assets.length > 0) {
         setPhoto(response.assets[0]);
       }
