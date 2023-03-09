@@ -9,7 +9,6 @@ import {
   Button,
 } from 'react-native';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
-import DisconnectButton from '../components/buttons/DisconnectButton';
 import useUserStore from '../stores/useUserStore';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import SkillPathStats from '../components/SkillPathStats';

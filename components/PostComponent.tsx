@@ -65,13 +65,6 @@ const PostComponent = ({
             />
             <Text style={styles.interactionCaption}>Like</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.postInteraction}>
-            <Image
-              style={styles.reportIcon}
-              source={require('../assets/report.png')}
-            />
-            <Text style={styles.interactionCaption}>Report</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </View>
