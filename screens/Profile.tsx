@@ -194,8 +194,6 @@ export default function Profile() {
       //Setting the number of column
       numColumns={3}
       keyExtractor={(item, index) => index.toString()}
-      ListFooterComponent={<DisconnectButton />}
-      ListFooterComponentStyle={{marginBottom: 16, alignItems: 'center'}}
     />
   );
 }
