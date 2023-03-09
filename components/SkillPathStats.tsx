@@ -13,14 +13,16 @@ const SkillPathStats = ({
   maxPoints: number;
 }) => {
   const width = ((points / maxPoints) * 100).toFixed(0) + '%';
-  console.log('Width', width);
+
   return (
     <View style={styles.container}>
       <Text style={styles.level}>
         Level {level} {skill}
       </Text>
       <View style={styles.progressBar}>
-        <View style={(StyleSheet.absoluteFill, {...styles.progress, width})} />
+        <View
+          style={[(StyleSheet.absoluteFill, {...styles.progress, width})]}
+        />
       </View>
       <View style={styles.pointsPanel}>
         <Text style={styles.points}>{points}</Text>
