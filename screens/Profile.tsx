@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -12,11 +12,13 @@ import {ParamListBase, useNavigation} from '@react-navigation/native';
 import DisconnectButton from '../components/buttons/DisconnectButton';
 import useUserStore from '../stores/useUserStore';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
+import SkillPathStats from '../components/SkillPathStats';
 
 export default function Profile() {
   const nav =
     useNavigation<BottomTabNavigationProp<ParamListBase, 'Profile'>>();
   const user = useUserStore(state => state.user);
+  const [skillPath, setSkillPath] = useState(0);
 
   return (
     <FlatList
@@ -79,6 +81,88 @@ export default function Profile() {
                   <Text>Avatar</Text>
                 </View>
               </View>
+              <View style={styles.skillTabs}>
+                <Pressable
+                  onPress={() => {
+                    setSkillPath(0);
+                  }}>
+                  <Text style={skillPath === 0 && styles.skillActive}>
+                    Warrior
+                  </Text>
+                </Pressable>
+                <Pressable
+                  onPress={() => {
+                    setSkillPath(1);
+                  }}>
+                  <Text style={skillPath === 1 && styles.skillActive}>
+                    Sage
+                  </Text>
+                </Pressable>
+                <Pressable
+                  onPress={() => {
+                    setSkillPath(2);
+                  }}>
+                  <Text style={skillPath === 2 && styles.skillActive}>
+                    Nuturer
+                  </Text>
+                </Pressable>
+                <Pressable
+                  onPress={() => {
+                    setSkillPath(3);
+                  }}>
+                  <Text style={skillPath === 3 && styles.skillActive}>
+                    Chef
+                  </Text>
+                </Pressable>
+                <Pressable
+                  onPress={() => {
+                    setSkillPath(4);
+                  }}>
+                  <Text style={skillPath === 4 && styles.skillActive}>
+                    Traveler
+                  </Text>
+                </Pressable>
+              </View>
+              {skillPath === 0 && (
+                <SkillPathStats
+                  skill="Warrior"
+                  level={3}
+                  points={700}
+                  maxPoints={1500}
+                />
+              )}
+              {skillPath === 1 && (
+                <SkillPathStats
+                  skill="Sage"
+                  level={0}
+                  points={20}
+                  maxPoints={100}
+                />
+              )}
+              {skillPath === 2 && (
+                <SkillPathStats
+                  skill="Nuturer"
+                  level={1}
+                  points={120}
+                  maxPoints={400}
+                />
+              )}
+              {skillPath === 3 && (
+                <SkillPathStats
+                  skill="Chef"
+                  level={4}
+                  points={950}
+                  maxPoints={2000}
+                />
+              )}
+              {skillPath === 4 && (
+                <SkillPathStats
+                  skill="Traveler"
+                  level={1}
+                  points={350}
+                  maxPoints={400}
+                />
+              )}
               <Text style={styles.postTitle}>Posts</Text>
             </View>
           ) : (
@@ -172,6 +256,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'green',
   },
+  skillTabs: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: '#EEEEEE',
+    borderRadius: 4,
+    padding: 4,
+    marginTop: 16,
+  },
+  skillActive: {fontWeight: 'bold', color: '#22AD74'},
+  skillInactive: {},
   postTitle: {
     fontSize: 22,
     fontWeight: 'bold',

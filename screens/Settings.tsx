@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import DisconnectButton from '../components/buttons/DisconnectButton';
 
 export default function Settings() {
