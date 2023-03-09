@@ -112,6 +112,6 @@ export default function Navigation() {
   if (selectedAccount) {
     return MainNavigator;
   } else {
-    return AuthNavigator;
+    return <Login />;
   }
 }

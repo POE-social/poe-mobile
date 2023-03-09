@@ -1,6 +1,6 @@
 import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
 import React, {useCallback, useState} from 'react';
-import {Button} from 'react-native';
+import {Pressable, StyleSheet, Text} from 'react-native';
 import {ProtocolOptions, SocialProtocol} from '@spling/social-protocol';
 
 import useAuthorization from '../../utils/useAuthorization';
@@ -71,10 +71,32 @@ export default function ConnectButton() {
     selectedAccount,
   ]);
   return (
-    <Button
-      title="Connect Wallet"
-      disabled={authorizationInProgress}
-      onPress={handleConnectPress}
-    />
+    <Pressable style={styles.button} onPress={handleConnectPress}>
+      <Text style={styles.text}>Connect wallet</Text>
+    </Pressable>
+    // <Button
+    //   title="Connect Wallet"
+    //   disabled={authorizationInProgress}
+    //   onPress={handleConnectPress}
+    // />
   );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: '#7ED956',
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'white',
+  },
+});
