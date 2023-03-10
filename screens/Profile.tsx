@@ -12,6 +12,7 @@ import {ParamListBase, useNavigation} from '@react-navigation/native';
 import useUserStore from '../stores/useUserStore';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import SkillPathStats from '../components/SkillPathStats';
+import DisconnectButton from '../components/buttons/DisconnectButton';
 
 export default function Profile() {
   const nav =
@@ -165,12 +166,15 @@ export default function Profile() {
               <Text style={styles.postTitle}>Posts</Text>
             </View>
           ) : (
-            <Button
-              title="Create user"
-              onPress={() => {
-                nav.navigate('User', {screen: 'CreateUpdateUser'});
-              }}
-            />
+            <View>
+              <Button
+                title="Create user"
+                onPress={() => {
+                  nav.navigate('User', {screen: 'CreateUpdateUser'});
+                }}
+              />
+              <DisconnectButton />
+            </View>
           )}
         </View>
       }
