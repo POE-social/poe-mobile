@@ -13,6 +13,7 @@ import useUserStore from '../stores/useUserStore';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import SkillPathStats from '../components/SkillPathStats';
 import Pet from '../components/Pet';
+import DisconnectButton from '../components/buttons/DisconnectButton';
 
 export default function Profile() {
   const nav =
@@ -166,12 +167,15 @@ export default function Profile() {
               <Text style={styles.postTitle}>Posts</Text>
             </View>
           ) : (
-            <Button
-              title="Create user"
-              onPress={() => {
-                nav.navigate('User', {screen: 'CreateUpdateUser'});
-              }}
-            />
+            <View>
+              <Button
+                title="Create user"
+                onPress={() => {
+                  nav.navigate('User', {screen: 'CreateUpdateUser'});
+                }}
+              />
+              <DisconnectButton />
+            </View>
           )}
         </View>
       }
