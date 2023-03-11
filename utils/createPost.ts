@@ -8,7 +8,7 @@ import {
   FileData,
 } from '@spling/social-protocol';
 import {mintPoeken} from './mintPoeken';
-import {APP_IDENTITY} from './useAuthorization';
+import {APP_IDENTITY, getPublicKeyFromAddress} from './useAuthorization';
 
 export const createPost = async (
   socialProtocol: SocialProtocol,
@@ -21,23 +21,27 @@ export const createPost = async (
 ) => {
   console.log('Creating new post...');
 
-  transact(async wallet => {
-    const account = await wallet.authorize({
-      cluster: 'mainnet-beta',
-      identity: APP_IDENTITY,
-    });
-    const post: Post = await socialProtocol.createPost(
-      1,
-      title,
-      text,
-      files,
-      tag,
-      metadata,
-    );
-    console.log('Created new post: ' + post);
+  // transact(async wallet => {
+  //   const account = await wallet.authorize({
+  //     cluster: 'mainnet-beta',
+  //     identity: APP_IDENTITY,
+  //   });
 
-    mintPoeken(connection, new PublicKey(account.accounts[0].address));
+  // const post: Post = await socialProtocol.createPost(
+  //   1,
+  //   title,
+  //   text,
+  //   files,
+  //   tag,
+  //   metadata,
+  // );
+  // console.log('Created new post: ' + post);
 
-    return post;
-  });
+  // return post;
+  // });
+  await mintPoeken(
+    connection,
+    new PublicKey('DXCRrz19BP644XakHM3QvRN74LNMof1dtQeKha2fUaMe'),
+    // getPublicKeyFromAddress(account.accounts[0].address),
+  );
 };

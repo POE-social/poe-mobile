@@ -24,13 +24,17 @@ export const mintPoeken = async (connection: Connection, user: PublicKey) => {
   console.log('ATA: ', tokenAccount.address);
 
   console.log('Mint Poeken...');
-  const tx = await mintTo(
-    connection,
-    authority,
-    mintInfo.address,
-    tokenAccount.address,
-    authority,
-    10 * 10 ** mintInfo.decimals,
-  );
-  console.log('Transaction: ', tx);
+  try {
+    const tx = await mintTo(
+      connection,
+      authority,
+      mintInfo.address,
+      tokenAccount.address,
+      authority,
+      10 * 10 ** mintInfo.decimals,
+    );
+    console.log('Transaction: ', tx);
+  } catch (e) {
+    console.log(e);
+  }
 };
