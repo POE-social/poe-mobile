@@ -36,12 +36,12 @@ export const createPost = async (
   //   metadata,
   // );
   // console.log('Created new post: ' + post);
-
-  // return post;
-  // });
   await mintPoeken(
     connection,
     new PublicKey('DXCRrz19BP644XakHM3QvRN74LNMof1dtQeKha2fUaMe'),
     // getPublicKeyFromAddress(account.accounts[0].address),
   );
+
+  // return post;
+  // });
 };
