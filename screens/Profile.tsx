@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -15,12 +15,53 @@ import SkillPathStats from '../components/SkillPathStats';
 
 import Pet from '../components/Pet';
 import DisconnectButton from '../components/buttons/DisconnectButton';
+import {Order_By, Post} from '@spling/social-protocol';
+import useSocialProtocolStore from '../stores/useSocialProtocolStore';
 
 export default function Profile() {
+  const socialProtocol = useSocialProtocolStore(state => state.socialProtocol);
+
   const nav =
     useNavigation<BottomTabNavigationProp<ParamListBase, 'Profile'>>();
   const user = useUserStore(state => state.user);
   const [skillPath, setSkillPath] = useState(0);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [page, setPage] = useState(1);
+  const [endOfList, setEndOfList] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // Trigger load posts.
+  useEffect(() => {
+    const loadPosts = async () => {
+      if (socialProtocol && user) {
+        try {
+          setLoading(true);
+
+          const newPosts: Post[] = await socialProtocol.getAllPostsByUserId(
+            user.userId,
+            20,
+            (page - 1) * 20,
+            Order_By.Desc,
+          );
+          if (newPosts.length === 0) {
+            setEndOfList(true);
+          }
+          setPosts([...posts, ...newPosts]);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+    loadPosts();
+  }, [socialProtocol, page]);
+
+  const handleLoadMorePosts = () => {
+    if (!loading && !endOfList) {
+      setPage(page + 1);
+    }
+  };
 
   return (
     <FlatList
@@ -181,23 +222,32 @@ export default function Profile() {
         </View>
       }
       style={styles.postGrid}
-      data={user ? [...Array(13).keys()] : null}
-      renderItem={({item}) => (
+      data={user ? posts : null}
+      renderItem={({item: post}) => (
         <View
-          key={item}
+          key={post.publicKey.toBase58()}
           style={{
             flex: 1,
             flexDirection: 'column',
             padding: 8,
           }}>
-          <Image
-            style={styles.imageThumbnail}
-            source={require('../assets/icon.png')}
-          />
+          {post.media[0]?.type === 'jpeg' ? (
+            <Image
+              source={{uri: post.media[0].file}}
+              style={styles.imageThumbnail}
+            />
+          ) : (
+            <Image
+              style={styles.imageThumbnail}
+              source={require('../assets/icon.png')}
+            />
+          )}
         </View>
       )}
       //Setting the number of column
       numColumns={3}
+      onEndReached={handleLoadMorePosts}
+      onEndReachedThreshold={0.5}
       keyExtractor={(item, index) => index.toString()}
     />
   );
@@ -280,5 +330,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 100,
     width: 100,
+    borderRadius: 8,
   },
 });
