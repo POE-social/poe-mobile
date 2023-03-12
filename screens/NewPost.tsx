@@ -14,9 +14,11 @@ import useSocialProtocolStore from '../stores/useSocialProtocolStore';
 import {FileUriData} from '@spling/social-protocol';
 import SelectDropdown from 'react-native-select-dropdown';
 import {createPost} from '../utils/createPost';
+import {useConnection} from '@solana/wallet-adapter-react';
 
 export default function NewPost() {
   const socialProtocol = useSocialProtocolStore(state => state.socialProtocol);
+  const {connection} = useConnection();
 
   // const groupNumber = 583646566156683917;
 
@@ -74,6 +76,7 @@ export default function NewPost() {
       }
       await createPost(
         socialProtocol,
+        connection,
         null,
         caption,
         [fileDataValue],

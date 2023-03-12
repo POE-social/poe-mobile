@@ -1,15 +1,18 @@
 // This is an example function for calling the SocialProtocol instance and creating a new user
 import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol';
+import {Connection} from '@solana/web3.js';
 import {
   FileUriData,
   SocialProtocol,
   Post,
   FileData,
 } from '@spling/social-protocol';
-import {APP_IDENTITY} from './useAuthorization';
+import {mintPoeken} from './mintPoeken';
+import {APP_IDENTITY, getPublicKeyFromAddress} from './useAuthorization';
 
 export const createPost = async (
   socialProtocol: SocialProtocol,
+  connection: Connection,
   title: string | null | undefined,
   text: string | null | undefined,
   files: FileData[] | FileUriData[],
@@ -17,8 +20,13 @@ export const createPost = async (
   metadata?: any,
 ) => {
   console.log('Creating new post...');
+
   transact(async wallet => {
-    await wallet.authorize({cluster: 'mainnet-beta', identity: APP_IDENTITY});
+    const account = await wallet.authorize({
+      cluster: 'mainnet-beta',
+      identity: APP_IDENTITY,
+    });
+
     const post: Post = await socialProtocol.createPost(
       1,
       title,
@@ -28,6 +36,11 @@ export const createPost = async (
       metadata,
     );
     console.log('Created new post: ' + post);
+    await mintPoeken(
+      connection,
+      getPublicKeyFromAddress(account.accounts[0].address),
+    );
+
     return post;
   });
 };

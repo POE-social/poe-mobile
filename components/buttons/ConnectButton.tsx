@@ -47,8 +47,7 @@ export default function ConnectButton() {
           payer: undefined as any,
         };
         const options = {
-          // rpcUrl: 'https://api.mainnet-beta.solana.com/',
-          rpcUrl: process.env['API_KEY'],
+          rpcUrl: process.env.API_KEY ?? 'https://api.mainnet-beta.solana.com/',
           useIndexer: true,
         } as ProtocolOptions;
 
@@ -71,14 +70,12 @@ export default function ConnectButton() {
     selectedAccount,
   ]);
   return (
-    <Pressable style={styles.button} onPress={handleConnectPress}>
+    <Pressable
+      style={styles.button}
+      onPress={handleConnectPress}
+      disabled={authorizationInProgress}>
       <Text style={styles.text}>Connect wallet</Text>
     </Pressable>
-    // <Button
-    //   title="Connect Wallet"
-    //   disabled={authorizationInProgress}
-    //   onPress={handleConnectPress}
-    // />
   );
 }
 

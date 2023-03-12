@@ -56,7 +56,9 @@ function getAuthorizationFromAuthorizationResult(
   };
 }
 
-function getPublicKeyFromAddress(address: Base64EncodedAddress): PublicKey {
+export function getPublicKeyFromAddress(
+  address: Base64EncodedAddress,
+): PublicKey {
   const publicKeyByteArray = toUint8Array(address);
   return new PublicKey(publicKeyByteArray);
 }

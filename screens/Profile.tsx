@@ -12,6 +12,7 @@ import {ParamListBase, useNavigation} from '@react-navigation/native';
 import useUserStore from '../stores/useUserStore';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import SkillPathStats from '../components/SkillPathStats';
+
 import Pet from '../components/Pet';
 import DisconnectButton from '../components/buttons/DisconnectButton';
 
