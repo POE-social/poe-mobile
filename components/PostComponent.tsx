@@ -61,7 +61,7 @@ const PostComponent = ({
             style={[styles.postInteraction, styles.likeInteraction]}>
             <Image
               style={styles.likeIcon}
-              source={require('../assets/like.png')}
+              source={require('../assets/liked.png')}
             />
             <Text style={styles.interactionCaption}>Like</Text>
           </TouchableOpacity>
