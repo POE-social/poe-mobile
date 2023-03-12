@@ -13,8 +13,9 @@ import {
 } from 'react-native';
 import {Cache, SWRConfig} from 'swr';
 
-// const DEVNET_ENDPOINT = /*#__PURE__*/ clusterApiUrl('devnet');
-const MAINNET_ENDPOINT = /*#__PURE__*/ clusterApiUrl('mainnet-beta');
+const MAINNET_ENDPOINT = process.env.API_KEY ?? clusterApiUrl('mainnet-beta');
+
+console.log('Env variable - RPC: ', process.env.API_KEY);
 
 function cacheReviver(key: string, value: any) {
   if (key === 'publicKey') {
