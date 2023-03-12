@@ -143,14 +143,17 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    color: 'black',
   },
   bioInput: {
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    color: 'black',
   },
   label: {
     fontWeight: 'bold',
+    color: 'black',
   },
 });
 

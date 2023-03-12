@@ -1,6 +1,6 @@
 import {Order_By, Post} from '@spling/social-protocol';
 import React, {useEffect, useState} from 'react';
-import {FlatList, RefreshControl, StyleSheet, Text, View} from 'react-native';
+import {FlatList, RefreshControl, StyleSheet, View} from 'react-native';
 import PostComponent from '../components/PostComponent';
 import useSocialProtocolStore from '../stores/useSocialProtocolStore';
 
@@ -63,12 +63,12 @@ export default function Feed() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.topMenu}>
-        <Text>Profile</Text>
-        <Text>Following</Text>
-        <Text>Feed</Text>
-        <Text>Filters</Text>
-      </View>
+      {/* <View style={styles.topMenu}>
+        <Text style={styles.topMenuText}>Profile</Text>
+        <Text style={styles.topMenuText}>Following</Text>
+        <Text style={styles.topMenuText}>Feed</Text>
+        <Text style={styles.topMenuText}>Filters</Text>
+      </View> */}
       <FlatList
         data={posts}
         renderItem={renderItem}
@@ -107,6 +107,14 @@ const styles = StyleSheet.create({
     paddingRight: 40,
     paddingTop: 20,
     paddingBottom: 20,
+    backgroundColor: 'black',
+  },
+  logo: {
+    width: 50,
+    height: 40,
+  },
+  topMenuText: {
+    color: 'white',
   },
   flatList: {
     height: '100%',

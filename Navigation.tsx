@@ -12,11 +12,19 @@ import Followers from './screens/Followers';
 import Following from './screens/Following';
 import FollowRequests from './screens/FollowRequests';
 import React, {useEffect} from 'react';
+import {Image} from 'react-native';
 import useAuthorization from './utils/useAuthorization';
 import CreateUpdateUser from './screens/CreateUpdateUser';
 import useSocialProtocolStore from './stores/useSocialProtocolStore';
 import useUserStore from './stores/useUserStore';
 import Settings from './screens/Settings';
+import {
+  FeedIcon,
+  LeaderboardIcon,
+  NewPostIcon,
+  ProfileIcon,
+  NotificationsIcon,
+} from './utils/NavigatorIcons';
 
 const FollowTab = createMaterialTopTabNavigator();
 const FollowNavigator = () => (
@@ -92,12 +100,97 @@ export default function Navigation() {
   // Create the main navigation component
   const Tab = createBottomTabNavigator();
   const MainNavigator = (
-    <Tab.Navigator>
-      <Tab.Screen name="Feed" component={Feed} />
-      <Tab.Screen name="Leaderboard" component={Leaderboard} />
-      <Tab.Screen name="NewPost" component={NewPost} />
-      <Tab.Screen name="Profile" component={ProfileNavigator} />
-      <Tab.Screen name="Notifications" component={NotificationsNavigator} />
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {paddingBottom: 4, paddingTop: 4},
+      }}>
+      <Tab.Screen
+        name="Feed"
+        component={Feed}
+        options={{
+          tabBarIcon: ({focused, color, size}) => (
+            <Image
+              source={
+                focused
+                  ? require('./assets/feed-icon-selected.png')
+                  : require('./assets/feed-icon.png')
+              }
+              style={{width: size, height: size}}
+            />
+          ),
+          tabBarActiveTintColor: '#23DD91',
+        }}
+      />
+      <Tab.Screen
+        name="Leaderboard"
+        component={Leaderboard}
+        options={{
+          tabBarIcon: ({focused, color, size}) => (
+            <Image
+              source={
+                focused
+                  ? require('./assets/leaderboard-icon-selected.png')
+                  : require('./assets/leaderboard-icon.png')
+              }
+              style={{width: size, height: size}}
+            />
+          ),
+          tabBarActiveTintColor: '#23DD91',
+        }}
+      />
+      <Tab.Screen
+        name="NewPost"
+        options={{
+          tabBarLabel: 'New Post',
+          tabBarIcon: ({focused, color, size}) => (
+            <Image
+              source={
+                focused
+                  ? require('./assets/new-post-icon-selected.png')
+                  : require('./assets/new-post-icon.png')
+              }
+              style={{width: size, height: size}}
+            />
+          ),
+          tabBarActiveTintColor: '#23DD91',
+        }}
+        component={NewPost}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileNavigator}
+        options={{
+          tabBarIcon: ({focused, color, size}) => (
+            <Image
+              source={
+                focused
+                  ? require('./assets/profile-icon-selected.png')
+                  : require('./assets/profile-icon.png')
+              }
+              style={{width: size, height: size}}
+            />
+          ),
+          tabBarActiveTintColor: '#23DD91',
+        }}
+      />
+      <Tab.Screen
+        name="Notifications"
+        component={NotificationsNavigator}
+        options={{
+          tabBarIcon: ({focused, color, size}) => (
+            <Image
+              source={
+                focused
+                  ? require('./assets/notifications-icon-selected.png')
+                  : require('./assets/notifications-icon.png')
+              }
+              style={{width: size, height: size}}
+            />
+          ),
+          tabBarActiveTintColor: '#23DD91',
+        }}
+      />
     </Tab.Navigator>
   );
 
