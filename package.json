@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
-    "start": "cross-env API_KEY='24837057-283e-45a8-a6d2-a0bd9c387ae7' PRIVATE_KEY='[58,220,123,53,68,252,154,183,140,69,228,11,122,82,230,157,13,45,197,132,7,57,225,185,8,218,238,1,220,41,133,112,186,8,150,253,128,175,201,207,255,214,225,1,173,98,94,18,177,53,198,236,148,138,106,81,24,80,6,23,227,98,248,201]' react-native start",
+    "start": "react-native start",
     "test": "jest"
   },
   "dependencies": {
