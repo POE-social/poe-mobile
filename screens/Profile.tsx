@@ -12,6 +12,8 @@ import {ParamListBase, useNavigation} from '@react-navigation/native';
 import useUserStore from '../stores/useUserStore';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import SkillPathStats from '../components/SkillPathStats';
+
+import Pet from '../components/Pet';
 import DisconnectButton from '../components/buttons/DisconnectButton';
 
 export default function Profile() {
@@ -78,7 +80,7 @@ export default function Profile() {
               </View>
               <View style={styles.avatarWrapper}>
                 <View style={styles.avatar}>
-                  <Text>Avatar</Text>
+                  <Pet />
                 </View>
               </View>
               <View style={styles.skillTabs}>
@@ -255,7 +257,7 @@ const styles = StyleSheet.create({
     height: 160,
     width: 140,
     alignItems: 'center',
-    backgroundColor: 'green',
+    // backgroundColor: 'green',
   },
   skillTabs: {
     flexDirection: 'row',
