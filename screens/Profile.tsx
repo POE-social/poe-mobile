@@ -92,10 +92,14 @@ export default function Profile() {
                   </View>
                 </Pressable>
                 <Pressable
+                  style={styles.settingsContainer}
                   onPress={() => {
                     nav.navigate('Settings', {screen: 'Settings'});
                   }}>
-                  <Text style={styles.settings}>Settings</Text>
+                  <Image
+                    source={require('../assets/settings.png')}
+                    style={styles.settingsImage}
+                  />
                 </Pressable>
               </View>
 
@@ -106,7 +110,7 @@ export default function Profile() {
                   }}>
                   <View style={styles.followInfo}>
                     <Text style={styles.followNum}>42</Text>
-                    <Text>Following</Text>
+                    <Text style={styles.following}>Following</Text>
                   </View>
                 </Pressable>
                 <Pressable
@@ -115,7 +119,7 @@ export default function Profile() {
                   }}>
                   <View style={styles.followInfo}>
                     <Text style={styles.followNum}>22</Text>
-                    <Text>Followers</Text>
+                    <Text style={styles.followers}>Followers</Text>
                   </View>
                 </Pressable>
               </View>
@@ -126,42 +130,87 @@ export default function Profile() {
               </View>
               <View style={styles.skillTabs}>
                 <Pressable
+                  style={[
+                    styles.skillTab,
+                    skillPath === 0 && styles.skillTabActive,
+                  ]}
                   onPress={() => {
                     setSkillPath(0);
                   }}>
-                  <Text style={skillPath === 0 && styles.skillActive}>
+                  <Text
+                    style={
+                      skillPath === 0
+                        ? styles.skillActive
+                        : styles.skillInactive
+                    }>
                     Warrior
                   </Text>
                 </Pressable>
                 <Pressable
+                  style={[
+                    styles.skillTab,
+                    skillPath === 1 && styles.skillTabActive,
+                  ]}
                   onPress={() => {
                     setSkillPath(1);
                   }}>
-                  <Text style={skillPath === 1 && styles.skillActive}>
+                  <Text
+                    style={
+                      skillPath === 1
+                        ? styles.skillActive
+                        : styles.skillInactive
+                    }>
                     Sage
                   </Text>
                 </Pressable>
                 <Pressable
+                  style={[
+                    styles.skillTab,
+                    skillPath === 2 && styles.skillTabActive,
+                  ]}
                   onPress={() => {
                     setSkillPath(2);
                   }}>
-                  <Text style={skillPath === 2 && styles.skillActive}>
+                  <Text
+                    style={
+                      skillPath === 2
+                        ? styles.skillActive
+                        : styles.skillInactive
+                    }>
                     Nuturer
                   </Text>
                 </Pressable>
                 <Pressable
+                  style={[
+                    styles.skillTab,
+                    skillPath === 3 && styles.skillTabActive,
+                  ]}
                   onPress={() => {
                     setSkillPath(3);
                   }}>
-                  <Text style={skillPath === 3 && styles.skillActive}>
+                  <Text
+                    style={
+                      skillPath === 3
+                        ? styles.skillActive
+                        : styles.skillInactive
+                    }>
                     Chef
                   </Text>
                 </Pressable>
                 <Pressable
+                  style={[
+                    styles.skillTab,
+                    skillPath === 4 && styles.skillTabActive,
+                  ]}
                   onPress={() => {
                     setSkillPath(4);
                   }}>
-                  <Text style={skillPath === 4 && styles.skillActive}>
+                  <Text
+                    style={
+                      skillPath === 4
+                        ? styles.skillActive
+                        : styles.skillInactive
+                    }>
                     Traveler
                   </Text>
                 </Pressable>
@@ -263,8 +312,9 @@ const styles = StyleSheet.create({
   },
   profileHeader: {
     flexDirection: 'row',
-    marginBottom: 8,
     justifyContent: 'space-between',
+    paddingTop: 10,
+    paddingBottom: 18,
   },
   profile: {
     flexDirection: 'row',
@@ -277,26 +327,45 @@ const styles = StyleSheet.create({
   },
   userInfo: {
     flexShrink: 1,
+    justifyContent: 'center',
   },
   username: {
     fontWeight: 'bold',
+    color: 'black',
   },
   userDescription: {
     fontSize: 12,
     opacity: 0.5,
+    color: 'black',
   },
-  settings: {marginRight: 16},
+  settingsContainer: {
+    justifyContent: 'center',
+  },
+  settingsImage: {
+    width: 30,
+    height: 30,
+  },
   followPanel: {
     width: 'auto',
     flexDirection: 'row',
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   followInfo: {
     flexDirection: 'row',
     marginRight: 32,
+    color: 'black',
   },
   followNum: {
     fontWeight: 'bold',
     marginRight: 4,
+    color: 'black',
+  },
+  following: {
+    color: 'black',
+  },
+  followers: {
+    color: 'black',
   },
   avatarWrapper: {
     width: '100%',
@@ -307,22 +376,37 @@ const styles = StyleSheet.create({
     height: 160,
     width: 140,
     alignItems: 'center',
-    // backgroundColor: 'green',
   },
   skillTabs: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    backgroundColor: '#EEEEEE',
+    backgroundColor: 'white',
     borderRadius: 4,
     padding: 4,
     marginTop: 16,
   },
+  skillTab: {
+    padding: 4,
+    flex: 1,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0)',
+  },
+  skillTabActive: {
+    borderRadius: 4,
+    borderColor: '#22AD74',
+    borderWidth: 1,
+    borderStyle: 'solid',
+  },
   skillActive: {fontWeight: 'bold', color: '#22AD74'},
-  skillInactive: {},
+  skillInactive: {
+    color: 'black',
+  },
   postTitle: {
     fontSize: 22,
     fontWeight: 'bold',
     marginTop: 32,
+    color: 'black',
   },
   postGrid: {backgroundColor: 'white', padding: 8},
   imageThumbnail: {
