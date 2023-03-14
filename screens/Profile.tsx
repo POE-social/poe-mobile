@@ -66,197 +66,195 @@ export default function Profile() {
   return (
     <FlatList
       ListHeaderComponent={
-        <View>
+        <View style={styles.container}>
           {user ? (
             <View>
-              <View style={styles.container}>
-                <View style={styles.profileHeader}>
-                  <Pressable
-                    onPress={() => {
-                      nav.navigate('User', {screen: 'CreateUpdateUser'});
-                    }}>
-                    <View style={styles.profile}>
-                      <Image
-                        style={styles.profilePicture}
-                        source={
-                          user.avatar
-                            ? {uri: user.avatar}
-                            : require('../assets/icon.png')
-                        }
-                      />
-                      <View style={styles.userInfo}>
-                        <Text style={styles.username}>{user.nickname}</Text>
-                        <Text style={styles.userDescription}>
-                          Level 2 Warrior
-                        </Text>
-                      </View>
-                    </View>
-                  </Pressable>
-                  <Pressable
-                    style={styles.settingsContainer}
-                    onPress={() => {
-                      nav.navigate('Settings', {screen: 'Settings'});
-                    }}>
+              <View style={styles.profileHeader}>
+                <Pressable
+                  onPress={() => {
+                    nav.navigate('User', {screen: 'CreateUpdateUser'});
+                  }}>
+                  <View style={styles.profile}>
                     <Image
-                      source={require('../assets/settings.png')}
-                      style={styles.settingsImage}
+                      style={styles.profilePicture}
+                      source={
+                        user.avatar
+                          ? {uri: user.avatar}
+                          : require('../assets/icon.png')
+                      }
                     />
-                  </Pressable>
-                </View>
-
-                <View style={styles.followPanel}>
-                  <Pressable
-                    onPress={() => {
-                      nav.navigate('Follow', {screen: 'Following'});
-                    }}>
-                    <View style={styles.followInfo}>
-                      <Text style={styles.followNum}>42</Text>
-                      <Text style={styles.following}>Following</Text>
+                    <View style={styles.userInfo}>
+                      <Text style={styles.username}>{user.nickname}</Text>
+                      <Text style={styles.userDescription}>
+                        Level 2 Warrior
+                      </Text>
                     </View>
-                  </Pressable>
-                  <Pressable
-                    onPress={() => {
-                      nav.navigate('Follow', {screen: 'Followers'});
-                    }}>
-                    <View style={styles.followInfo}>
-                      <Text style={styles.followNum}>22</Text>
-                      <Text style={styles.followers}>Followers</Text>
-                    </View>
-                  </Pressable>
-                </View>
-                <View style={styles.avatarWrapper}>
-                  <View style={styles.avatar}>
-                    <Pet />
                   </View>
-                </View>
-                <View style={styles.skillTabs}>
-                  <Pressable
-                    style={[
-                      styles.skillTab,
-                      skillPath === 0 && styles.skillTabActive,
-                    ]}
-                    onPress={() => {
-                      setSkillPath(0);
-                    }}>
-                    <Text
-                      style={
-                        skillPath === 0
-                          ? styles.skillActive
-                          : styles.skillInactive
-                      }>
-                      Warrior
-                    </Text>
-                  </Pressable>
-                  <Pressable
-                    style={[
-                      styles.skillTab,
-                      skillPath === 1 && styles.skillTabActive,
-                    ]}
-                    onPress={() => {
-                      setSkillPath(1);
-                    }}>
-                    <Text
-                      style={
-                        skillPath === 1
-                          ? styles.skillActive
-                          : styles.skillInactive
-                      }>
-                      Sage
-                    </Text>
-                  </Pressable>
-                  <Pressable
-                    style={[
-                      styles.skillTab,
-                      skillPath === 2 && styles.skillTabActive,
-                    ]}
-                    onPress={() => {
-                      setSkillPath(2);
-                    }}>
-                    <Text
-                      style={
-                        skillPath === 2
-                          ? styles.skillActive
-                          : styles.skillInactive
-                      }>
-                      Nuturer
-                    </Text>
-                  </Pressable>
-                  <Pressable
-                    style={[
-                      styles.skillTab,
-                      skillPath === 3 && styles.skillTabActive,
-                    ]}
-                    onPress={() => {
-                      setSkillPath(3);
-                    }}>
-                    <Text
-                      style={
-                        skillPath === 3
-                          ? styles.skillActive
-                          : styles.skillInactive
-                      }>
-                      Chef
-                    </Text>
-                  </Pressable>
-                  <Pressable
-                    style={[
-                      styles.skillTab,
-                      skillPath === 4 && styles.skillTabActive,
-                    ]}
-                    onPress={() => {
-                      setSkillPath(4);
-                    }}>
-                    <Text
-                      style={
-                        skillPath === 4
-                          ? styles.skillActive
-                          : styles.skillInactive
-                      }>
-                      Traveler
-                    </Text>
-                  </Pressable>
-                </View>
-                {skillPath === 0 && (
-                  <SkillPathStats
-                    skill="Warrior"
-                    level={3}
-                    points={700}
-                    maxPoints={1500}
+                </Pressable>
+                <Pressable
+                  style={styles.settingsContainer}
+                  onPress={() => {
+                    nav.navigate('Settings', {screen: 'Settings'});
+                  }}>
+                  <Image
+                    source={require('../assets/settings.png')}
+                    style={styles.settingsImage}
                   />
-                )}
-                {skillPath === 1 && (
-                  <SkillPathStats
-                    skill="Sage"
-                    level={0}
-                    points={20}
-                    maxPoints={100}
-                  />
-                )}
-                {skillPath === 2 && (
-                  <SkillPathStats
-                    skill="Nuturer"
-                    level={1}
-                    points={120}
-                    maxPoints={400}
-                  />
-                )}
-                {skillPath === 3 && (
-                  <SkillPathStats
-                    skill="Chef"
-                    level={4}
-                    points={950}
-                    maxPoints={2000}
-                  />
-                )}
-                {skillPath === 4 && (
-                  <SkillPathStats
-                    skill="Traveler"
-                    level={1}
-                    points={350}
-                    maxPoints={400}
-                  />
-                )}
+                </Pressable>
               </View>
+
+              <View style={styles.followPanel}>
+                <Pressable
+                  onPress={() => {
+                    nav.navigate('Follow', {screen: 'Following'});
+                  }}>
+                  <View style={styles.followInfo}>
+                    <Text style={styles.followNum}>42</Text>
+                    <Text style={styles.following}>Following</Text>
+                  </View>
+                </Pressable>
+                <Pressable
+                  onPress={() => {
+                    nav.navigate('Follow', {screen: 'Followers'});
+                  }}>
+                  <View style={styles.followInfo}>
+                    <Text style={styles.followNum}>22</Text>
+                    <Text style={styles.followers}>Followers</Text>
+                  </View>
+                </Pressable>
+              </View>
+              <View style={styles.avatarWrapper}>
+                <View style={styles.avatar}>
+                  <Pet />
+                </View>
+              </View>
+              <View style={styles.skillTabs}>
+                <Pressable
+                  style={[
+                    styles.skillTab,
+                    skillPath === 0 && styles.skillTabActive,
+                  ]}
+                  onPress={() => {
+                    setSkillPath(0);
+                  }}>
+                  <Text
+                    style={
+                      skillPath === 0
+                        ? styles.skillActive
+                        : styles.skillInactive
+                    }>
+                    Warrior
+                  </Text>
+                </Pressable>
+                <Pressable
+                  style={[
+                    styles.skillTab,
+                    skillPath === 1 && styles.skillTabActive,
+                  ]}
+                  onPress={() => {
+                    setSkillPath(1);
+                  }}>
+                  <Text
+                    style={
+                      skillPath === 1
+                        ? styles.skillActive
+                        : styles.skillInactive
+                    }>
+                    Sage
+                  </Text>
+                </Pressable>
+                <Pressable
+                  style={[
+                    styles.skillTab,
+                    skillPath === 2 && styles.skillTabActive,
+                  ]}
+                  onPress={() => {
+                    setSkillPath(2);
+                  }}>
+                  <Text
+                    style={
+                      skillPath === 2
+                        ? styles.skillActive
+                        : styles.skillInactive
+                    }>
+                    Nuturer
+                  </Text>
+                </Pressable>
+                <Pressable
+                  style={[
+                    styles.skillTab,
+                    skillPath === 3 && styles.skillTabActive,
+                  ]}
+                  onPress={() => {
+                    setSkillPath(3);
+                  }}>
+                  <Text
+                    style={
+                      skillPath === 3
+                        ? styles.skillActive
+                        : styles.skillInactive
+                    }>
+                    Chef
+                  </Text>
+                </Pressable>
+                <Pressable
+                  style={[
+                    styles.skillTab,
+                    skillPath === 4 && styles.skillTabActive,
+                  ]}
+                  onPress={() => {
+                    setSkillPath(4);
+                  }}>
+                  <Text
+                    style={
+                      skillPath === 4
+                        ? styles.skillActive
+                        : styles.skillInactive
+                    }>
+                    Traveler
+                  </Text>
+                </Pressable>
+              </View>
+              {skillPath === 0 && (
+                <SkillPathStats
+                  skill="Warrior"
+                  level={3}
+                  points={700}
+                  maxPoints={1500}
+                />
+              )}
+              {skillPath === 1 && (
+                <SkillPathStats
+                  skill="Sage"
+                  level={0}
+                  points={20}
+                  maxPoints={100}
+                />
+              )}
+              {skillPath === 2 && (
+                <SkillPathStats
+                  skill="Nuturer"
+                  level={1}
+                  points={120}
+                  maxPoints={400}
+                />
+              )}
+              {skillPath === 3 && (
+                <SkillPathStats
+                  skill="Chef"
+                  level={4}
+                  points={950}
+                  maxPoints={2000}
+                />
+              )}
+              {skillPath === 4 && (
+                <SkillPathStats
+                  skill="Traveler"
+                  level={1}
+                  points={350}
+                  maxPoints={400}
+                />
+              )}
               <Text style={styles.postTitle}>Posts</Text>
             </View>
           ) : (
@@ -307,11 +305,10 @@ export default function Profile() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#23DD91',
+    backgroundColor: '#fff',
     alignItems: 'stretch',
     justifyContent: 'flex-start',
     padding: 8,
-    paddingBottom: 16,
   },
   profileHeader: {
     flexDirection: 'row',
@@ -408,12 +405,10 @@ const styles = StyleSheet.create({
   postTitle: {
     fontSize: 22,
     fontWeight: 'bold',
-    marginTop: 8,
-    padding: 8,
+    marginTop: 32,
     color: 'black',
-    backgroundColor: '#fff',
   },
-  postGrid: {backgroundColor: '#fff', opacity: 10, padding: 8},
+  postGrid: {backgroundColor: 'white', padding: 8},
   imageThumbnail: {
     justifyContent: 'center',
     alignItems: 'center',
