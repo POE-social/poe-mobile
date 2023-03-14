@@ -35,12 +35,21 @@ export default function NewPost() {
 
   // Select the photo
   const handleChoosePhoto = () => {
-    launchImageLibrary({mediaType: 'photo', selectionLimit: 1}, response => {
-      console.log('Image Picker Response: ', response);
-      if (response.assets && response.assets.length > 0) {
-        setPhoto(response.assets[0]);
-      }
-    });
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+        selectionLimit: 1,
+        maxWidth: 512,
+        maxHeight: 1024,
+        quality: 0.9,
+      },
+      response => {
+        console.log('Image Picker Response: ', response);
+        if (response.assets && response.assets.length > 0) {
+          setPhoto(response.assets[0]);
+        }
+      },
+    );
   };
 
   // Upload the photo

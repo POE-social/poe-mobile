@@ -28,7 +28,7 @@ export const createPost = async (
     });
 
     const post: Post = await socialProtocol.createPost(
-      1,
+      37,
       title,
       text,
       files,

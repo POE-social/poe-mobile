@@ -28,12 +28,21 @@ const CreateUpdateUser = () => {
   const [avatar, setAvatar] = useState<Asset | null>(null);
 
   const handleChoosePhoto = () => {
-    launchImageLibrary({mediaType: 'photo', selectionLimit: 1}, response => {
-      console.log('Image Picker Response: ', response);
-      if (response.assets && response.assets.length > 0) {
-        setAvatar(response.assets[0]);
-      }
-    });
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+        selectionLimit: 1,
+        maxWidth: 512,
+        maxHeight: 1024,
+        quality: 0.9,
+      },
+      response => {
+        console.log('Image Picker Response: ', response);
+        if (response.assets && response.assets.length > 0) {
+          setAvatar(response.assets[0]);
+        }
+      },
+    );
   };
 
   console.log('created user:', user);

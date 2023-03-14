@@ -1,9 +1,13 @@
+import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol';
 import React from 'react';
 import {StyleSheet, Text, View, Image, FlatList} from 'react-native';
 import PositiveButton from '../components/buttons/PositiveButton';
 import Divider from '../components/Divider';
+import useSocialProtocolStore from '../stores/useSocialProtocolStore';
+import {APP_IDENTITY} from '../utils/useAuthorization';
 
 export default function Leaderboard() {
+  const socialProtocol = useSocialProtocolStore(state => state.socialProtocol);
   return (
     <FlatList
       ListHeaderComponent={

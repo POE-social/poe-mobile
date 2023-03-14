@@ -22,7 +22,7 @@ export default function Feed() {
           setLoading(true);
 
           const newPosts: Post[] = await socialProtocol.getAllPosts(
-            1,
+            37,
             20,
             (page - 1) * 20,
             Order_By.Desc,
